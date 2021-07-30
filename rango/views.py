@@ -23,7 +23,6 @@ def about(request):
     # return HttpResponse("Rango says here is the about page.<a href='/rango/'>Index</a>")
 
 def show_category(request, category_name_slug):
-
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
@@ -52,14 +51,13 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 def add_page(request, category_name_slug):
-
     try:
         category = Category.objects.get(slug=category_name_slug)
     except :
         category = None
 
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:index'))
 
     form = PageForm()
 
